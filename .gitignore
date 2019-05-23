@@ -3,3 +3,6 @@ node_modules/
 
 # Bundle
 client/dist/bundle.js
+
+# DS_Store
+.DS_Store
