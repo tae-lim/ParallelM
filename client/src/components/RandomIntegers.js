@@ -4,7 +4,7 @@ class RandomIntegers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      integers: [],
+      integer: '',
       date: ''
     }
   }
@@ -21,9 +21,7 @@ class RandomIntegers extends React.Component {
   }
 
   updateIntegers(integer) {
-    const integers = this.state.integers;
-    integers.push(integer);
-    this.setState({ integers }, () => {console.log(this.state.integers)});
+    this.setState({ integer }, () => {console.log(this.state.integer)});
   }
 
   fetchRandomInteger() {
