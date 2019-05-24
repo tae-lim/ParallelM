@@ -1,4 +1,5 @@
 import React from 'react';
+import RandomIntegersChart from './RandomIntegersChart';
 
 class RandomIntegers extends React.Component {
   constructor(props) {
@@ -34,9 +35,13 @@ class RandomIntegers extends React.Component {
 
   render() {
     return (
-      <div>Random Integers</div>
+      <div>
+        <h2>Random Integers</h2>
+        <RandomIntegersChart />
+      </div>
+      
     )
   }
 }
 
-export default RandomIntegers
+export default RandomIntegers;
