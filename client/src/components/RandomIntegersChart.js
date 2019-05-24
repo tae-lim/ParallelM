@@ -4,32 +4,55 @@ import CanvasJSReact from '../lib/canvasjs-2.3.1/canvasjs.react';
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
+const dps = [];
+
 class RandomIntegersChart extends React.Component {
-  render() {
-    const options = {
-      title: {
-        text: "Basic Column Chart in React"
-      },
-      data: [{				
-        type: "column",
-        dataPoints: [
-            { label: "Apple",  y: 10  },
-            { label: "Orange", y: 15  },
-            { label: "Banana", y: 25  },
-            { label: "Mango",  y: 30  },
-            { label: "Grape",  y: 28  }
-        ]
-      }]
-   }
-		
-   return (
-      <div>
-        <CanvasJSChart options = {options}
-            /* onRef = {ref => this.chart = ref} */
-        />
-      </div>
-    );
+  constructor(props) {
+    super(props);
   }
+
+  componentDidUpdate(prevProps) {
+    const prevDate = prevProps.date;
+    const currDate = this.props.date;
+    const integer = this.props.integer;
+
+    if (!this.datesAreEqual(prevDate, currDate)) {
+      this.updateChart(currDate, integer)
+    }
+  }
+
+  datesAreEqual(date1, date2) {
+    return date1 === date2;
+  }
+
+  updateChart(date, integer) {
+    const dp = {
+      x: date,
+      y: integer
+    }
+    dps.push(dp);
+    this.chart.render();
+  }
+
+	render() {
+		const options = {
+			title :{
+				text: "Random Number Generator"
+			},
+			data: [{
+				type: "line",
+				dataPoints : dps
+			}]
+		}
+		return (
+		<div>
+			<CanvasJSChart options = {options}
+				 onRef={ref => this.chart = ref}
+			/>
+			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+		</div>
+		);
+	}
 }
 
 export default RandomIntegersChart;
