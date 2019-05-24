@@ -47,7 +47,7 @@ class RandomIntegers extends React.Component {
   }
 
   updateDate() {
-    const date = new Date();
+    const date = new Date().toString().slice(4, 24);
     this.setState({ date });
   }
 

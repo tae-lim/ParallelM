@@ -27,7 +27,7 @@ class RandomIntegersChart extends React.Component {
 
   updateChart(date, integer) {
     const dp = {
-      x: date,
+      label: date,
       y: integer
     }
     dps.push(dp);
@@ -36,14 +36,24 @@ class RandomIntegersChart extends React.Component {
 
 	render() {
 		const options = {
+      animationEnabled: true,
+      exportEnabled: true,
 			title :{
-				text: "Random Number Generator"
-			},
+        text: "Random Number Generator: 0 - 100",
+      },
+      axisY: {
+        title: "Number"
+      },
+      axisX: {
+        title: "Date"
+      },
 			data: [{
-				type: "line",
+        type: "line",
+        toolTipContent: "{label}: {y}",
 				dataPoints : dps
-			}]
-		}
+      }],
+      zoomEnabled: true
+    }
 		return (
 		<div>
 			<CanvasJSChart options = {options}
