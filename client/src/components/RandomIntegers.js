@@ -1,4 +1,5 @@
 import React from 'react';
+import regeneratorRuntime from "regenerator-runtime";
 import RandomIntegersChart from './RandomIntegersChart';
 
 class RandomIntegers extends React.Component {
@@ -11,35 +12,47 @@ class RandomIntegers extends React.Component {
   }
 
   componentDidMount() {
+    this.updateIntegerAndDateEveryTwoSeconds();
+  }
+
+  updateIntegerAndDateEveryTwoSeconds() {
     this.randomIntegerTimer = setInterval(() => {
-      this.fetchRandomInteger();
+      this.fetchRandomInteger()
+        .then(integer => this.updateInteger(Number(integer)))
+        .then(() => this.updateDate())
+        .catch(err => console.log(err));
     }, 2000);
   }
 
-  getCurrentDate() {
+  async fetchRandomInteger() {
+    try {
+      const response = await fetch('/api/number')
+      const integer = await response.text();
+      return integer;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  updateInteger(integer) {
+    this.setState({ integer });
+  }
+
+  updateDate() {
     const date = new Date();
-    this.setState({ date }, () => {console.log(this.state.date)});
+    this.setState({ date });
   }
 
-  updateIntegers(integer) {
-    this.setState({ integer }, () => {console.log(this.state.integer)});
-  }
-
-  fetchRandomInteger() {
-    fetch('/api/number')
-      .then(response => response.text())
-      .then(integer => this.updateIntegers(Number(integer)))
-      .then(() => this.getCurrentDate())
-      .catch(err => console.log(err));
+  componentWillUnmount() {
+    clearInterval(this.randomIntegerTimer);
   }
 
   render() {
+    const { date, integer } = this.state;
     return (
       <div>
-        <h2>Random Integers</h2>
-        <RandomIntegersChart integer={this.state.integer} date={this.state.date}/>
+        <RandomIntegersChart integer={integer} date={date}/>
       </div>
-      
     )
   }
 }
