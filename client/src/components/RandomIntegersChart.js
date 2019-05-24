@@ -26,9 +26,13 @@ class RandomIntegersChart extends React.Component {
   }
 
   updateChart(date, integer) {
+    const dateAndTime = date.split(', ');
+    const MDY = dateAndTime[0];
+    const time = dateAndTime[1];
     const dp = {
-      label: date,
-      y: integer
+      label: time,
+      y: integer,
+      date: MDY
     }
     dps.push(dp);
     this.chart.render();
@@ -36,20 +40,24 @@ class RandomIntegersChart extends React.Component {
 
 	render() {
 		const options = {
-      animationEnabled: true,
       exportEnabled: true,
 			title :{
-        text: "Random Number Generator: 0 - 100",
+        text: "Random Number Generator",
       },
+      theme: "light2",
       axisY: {
         title: "Number"
       },
       axisX: {
         title: "Date"
       },
+      subtitles: [{
+        text: "0 - 100",
+        fontSize: 20
+      }],
 			data: [{
         type: "line",
-        toolTipContent: "{label}: {y}",
+        toolTipContent: "{date}: {y}",
 				dataPoints : dps
       }],
       zoomEnabled: true

@@ -47,7 +47,16 @@ class RandomIntegers extends React.Component {
   }
 
   updateDate() {
-    const date = new Date().toString().slice(4, 24);
+    const options = {
+      month: '2-digit',
+      day: "2-digit",
+      year: "2-digit",
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: true
+    }
+    const date = new Date().toLocaleString('en-US', options);
     this.setState({ date });
   }
 
