@@ -12,15 +12,23 @@ class RandomIntegers extends React.Component {
   }
 
   componentDidMount() {
-    this.updateIntegerAndDateEveryTwoSeconds();
+    this.updateIntegerAndDate()
+      .then(() => {this.updateIntegerAndDateEveryTwoSeconds()})
+  }
+
+  async updateIntegerAndDate() {
+    try {
+      const integer = await this.fetchRandomInteger();
+      this.updateInteger(Number(integer))
+      this.updateDate();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   updateIntegerAndDateEveryTwoSeconds() {
     this.randomIntegerTimer = setInterval(() => {
-      this.fetchRandomInteger()
-        .then(integer => this.updateInteger(Number(integer)))
-        .then(() => this.updateDate())
-        .catch(err => console.log(err));
+      this.updateIntegerAndDate();
     }, 2000);
   }
 
@@ -51,7 +59,10 @@ class RandomIntegers extends React.Component {
     const { date, integer } = this.state;
     return (
       <div>
-        <RandomIntegersChart integer={integer} date={date}/>
+        <RandomIntegersChart 
+           integer={integer} 
+           date={date}
+        />
       </div>
     )
   }
