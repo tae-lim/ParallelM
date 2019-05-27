@@ -38,10 +38,9 @@ class RandomIntegersChart extends React.Component {
     this.chart.render();
   }
 
-	render() {
-		const options = {
-      exportEnabled: true,
-			title :{
+  render() {
+    const options = {
+      title :{
         text: "Random Number Generator",
       },
       theme: "light2",
@@ -55,22 +54,23 @@ class RandomIntegersChart extends React.Component {
         text: "0 - 100",
         fontSize: 20
       }],
-			data: [{
+      data: [{
         type: "line",
         toolTipContent: "{date}: {y}",
-				dataPoints : dps
+        dataPoints : dps
       }],
+      exportEnabled: true,
       zoomEnabled: true
     }
-		return (
-		<div>
-			<CanvasJSChart options = {options}
-				 onRef={ref => this.chart = ref}
-			/>
-			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
-		</div>
-		);
-	}
+    return (
+      <div className="random-integers-chart-container">
+        <CanvasJSChart options = {options}
+          onRef={ref => this.chart = ref}
+        />
+        {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+      </div>
+    );
+  }
 }
 
 export default RandomIntegersChart;

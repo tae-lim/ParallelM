@@ -67,10 +67,10 @@ class RandomIntegers extends React.Component {
   render() {
     const { date, integer } = this.state;
     return (
-      <div>
+      <div className="random-integers-container">
         <RandomIntegersChart 
-           integer={integer} 
-           date={date}
+          integer={integer} 
+          date={date}
         />
       </div>
     )

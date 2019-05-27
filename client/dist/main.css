@@ -1,0 +1,13 @@
+.main-container {
+  display: flex;
+  height: 1000px;
+  align-items: center;
+}
+
+.random-integers-container {
+  width: 100%;
+}
+
+.random-integers-chart-container {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
