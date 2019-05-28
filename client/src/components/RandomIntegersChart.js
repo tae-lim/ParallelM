@@ -59,9 +59,7 @@ class RandomIntegersChart extends React.Component {
       data: [{
         type: "line",
         toolTipContent: "{x}: {y}",
-        dataPoints: [{ label: "Apple", y: 658 },
-        { label: "Orange", y: 200 },
-        { label: "Banana", y: 900 }]
+        dataPoints: []
       }],
       exportEnabled: true,
       zoomEnabled: true
