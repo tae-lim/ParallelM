@@ -4,10 +4,10 @@ import CanvasJSReact from '../lib/canvasjs-2.3.1/canvasjs.react';
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
+const dps = [];
 class RandomIntegersChart extends React.Component {
   constructor(props) {
     super(props);
-    let count = 0;
   }
 
   componentDidUpdate(prevProps) {
@@ -58,8 +58,8 @@ class RandomIntegersChart extends React.Component {
       }],
       data: [{
         type: "line",
-        toolTipContent: "{x}: {y}",
-        dataPoints: []
+        toolTipContent: "{date}: {y}",
+        dataPoints: dps
       }],
       exportEnabled: true,
       zoomEnabled: true
