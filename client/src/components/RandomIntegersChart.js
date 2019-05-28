@@ -4,11 +4,10 @@ import CanvasJSReact from '../lib/canvasjs-2.3.1/canvasjs.react';
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-const dps = [];
-
 class RandomIntegersChart extends React.Component {
   constructor(props) {
     super(props);
+    let count = 0;
   }
 
   componentDidUpdate(prevProps) {
@@ -34,15 +33,18 @@ class RandomIntegersChart extends React.Component {
       y: integer,
       date: MDY
     }
-    dps.push(dp);
+    this.chart.options.data[0].dataPoints.push(dp);
     this.chart.render();
   }
 
   render() {
+    //Animation enabled only renders first set of datapoints when chart is instantiated.
+    //https://canvasjs.com/forums/topic/how-to-re-render-with-animation/
     const options = {
       title :{
         text: "Random Number Generator",
       },
+      //animationEnabled: true,
       theme: "light2",
       axisY: {
         title: "Number"
@@ -56,8 +58,10 @@ class RandomIntegersChart extends React.Component {
       }],
       data: [{
         type: "line",
-        toolTipContent: "{date}: {y}",
-        dataPoints : dps
+        toolTipContent: "{x}: {y}",
+        dataPoints: [{ label: "Apple", y: 658 },
+        { label: "Orange", y: 200 },
+        { label: "Banana", y: 900 }]
       }],
       exportEnabled: true,
       zoomEnabled: true
